@@ -50,6 +50,7 @@
     tealdeer
     gopls
     air
+    ncurses
   ];
 
   languages = {
