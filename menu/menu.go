@@ -2,7 +2,8 @@ package menu
 
 import (
 	. "github.com/gbin/goncurses"
-	"log"
+  . "gitlab.com/stvnliu/ai_game/utils/types"
+	// "log"
 )
 
 const (
@@ -10,12 +11,8 @@ const (
 	WIDTH  = 30
 )
 
-func CreateMenu(menu []string) {
+func CreateMenu(stdscr *Window, menu []GameMenuItem) {
 	var active int
-	stdscr, err := Init()
-	if err != nil {
-		log.Fatal(err)
-	}
 	defer End()
 
 	Raw(true)
@@ -28,7 +25,7 @@ func CreateMenu(menu []string) {
 	y, x := 2, (mx/2)-(WIDTH/2)
 
 	win, _ := NewWindow(HEIGHT, WIDTH, y, x)
-	win.Keypad(true)
+  win.Keypad(true)
 
 	stdscr.Print("Use arrow keys to go up and down, Press enter to select")
 	stdscr.Refresh()
@@ -55,7 +52,8 @@ func CreateMenu(menu []string) {
 		case KEY_RETURN, KEY_ENTER, Key('\r'):
 			stdscr.MovePrintf(my-2, 0, "Choice #%d: %s selected",
 				active,
-				menu[active])
+				menu[active].Name)
+      menu[active].Operation(stdscr)
 			stdscr.ClearToEOL()
 			stdscr.Refresh()
 		default:
@@ -69,16 +67,16 @@ func CreateMenu(menu []string) {
 	}
 }
 
-func printmenu(w *Window, menu []string, active int) {
+func printmenu(w *Window, menu []GameMenuItem, active int) {
 	y, x := 2, 2
 	w.Box(0, 0)
-	for i, s := range menu {
+	for i, item := range menu {
 		if i == active {
 			w.AttrOn(A_REVERSE)
-			w.MovePrint(y+i, x, s)
+			w.MovePrint(y+i, x, item.Name)
 			w.AttrOff(A_REVERSE)
 		} else {
-			w.MovePrint(y+i, x, s)
+			w.MovePrint(y+i, x, item.Name)
 		}
 	}
 	w.Refresh()
