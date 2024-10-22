@@ -17,7 +17,7 @@
   scripts = {
     hello.exec = "echo $GREET";
     cat.exec = "bat $@";
-
+    build.exec = "go build -o ./bin/";
     show = {
       # Prints scripts that have a description
       # Adapted from https://github.com/cachix/devenv/blob/ef61728d91ad5eb91f86cdbcc16070602e7afa16/examples/scripts/devenv.nix#L34

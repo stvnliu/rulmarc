@@ -31,3 +31,6 @@ devenv.local.nix
 ### direnv ###
 .direnv
 
+### custom -- build artifacts directory ###
+bin 
+**/bin
