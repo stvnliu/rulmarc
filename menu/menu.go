@@ -2,7 +2,7 @@ package menu
 
 import (
 	. "github.com/gbin/goncurses"
-  . "gitlab.com/stvnliu/ai_game/utils/types"
+	. "gitlab.com/stvnliu/ai_game/utils/types"
 	// "log"
 )
 
@@ -21,13 +21,13 @@ func CreateMenu(stdscr *Window, menu []GameMenuItem) {
 	stdscr.Clear()
 	stdscr.Keypad(true)
 
-	my, mx := stdscr.MaxYX()
+	_, mx := stdscr.MaxYX()
 	y, x := 2, (mx/2)-(WIDTH/2)
 
 	win, _ := NewWindow(HEIGHT, WIDTH, y, x)
-  win.Keypad(true)
+	win.Keypad(true)
 
-	stdscr.Print("Welcome to Rulmarc, the Role-playing game using LLMs")
+	stdscr.Print("Welcome to Rulmarc, the Role-playing game using LLMs (Use q to quit the current window)")
 	stdscr.Refresh()
 
 	printmenu(win, menu, active)
@@ -36,6 +36,8 @@ func CreateMenu(stdscr *Window, menu []GameMenuItem) {
 		ch := stdscr.GetChar()
 		switch Key(ch) {
 		case 'q':
+			win.Erase()
+			win.Refresh()
 			return
 		case KEY_UP:
 			if active == 0 {
@@ -50,15 +52,13 @@ func CreateMenu(stdscr *Window, menu []GameMenuItem) {
 				active += 1
 			}
 		case KEY_RETURN, KEY_ENTER, Key('\r'):
-			stdscr.MovePrintf(my-2, 0, "Choice #%d: %s selected",
-				active,
-				menu[active].Name)
-      menu[active].Operation(stdscr)
+			menu[active].Operation(stdscr)
 			stdscr.ClearToEOL()
+			win.Erase()
+			win.Refresh()
 			stdscr.Refresh()
+			return
 		default:
-			stdscr.MovePrintf(my-2, 0, "Character pressed = %3d/%c",
-				ch, ch)
 			stdscr.ClearToEOL()
 			stdscr.Refresh()
 		}
