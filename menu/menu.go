@@ -27,7 +27,7 @@ func CreateMenu(stdscr *Window, menu []GameMenuItem) {
 	win, _ := NewWindow(HEIGHT, WIDTH, y, x)
   win.Keypad(true)
 
-	stdscr.Print("Use arrow keys to go up and down, Press enter to select")
+	stdscr.Print("Welcome to Rulmarc, the Role-playing game using LLMs")
 	stdscr.Refresh()
 
 	printmenu(win, menu, active)
