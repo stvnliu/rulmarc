@@ -23,7 +23,7 @@ func InputPrompt(scr *Window) string {
 	w.Box(0, 0)
 	Echo(true)
 	msg := "Game name: "
-  w.MovePrint(0, 1, " New game information ")
+	w.MovePrint(0, 1, " New game information ")
 	w.MovePrint(2, 2, msg)
 	w.Move(2, 2+len(msg))
 	input, err := w.GetString(16) // character input box
@@ -32,7 +32,7 @@ func InputPrompt(scr *Window) string {
 	}
 	w.MovePrint(3, 2, input)
 	w.Refresh()
-  Echo(false)
+	Echo(false)
 	for {
 		ch := w.GetChar()
 		switch Key(ch) {
@@ -52,14 +52,14 @@ func NewGame(scr *Window) {
 	}
 	my_npcs := MakeNpcs()
 	game.DataStored.Npcs = my_npcs
-  scr.MovePrintf(1, 2, "Created new game \"%v\"!", game.SaveGame)
-  for i:=0; i<len(game.DataStored.Npcs); i++ {
-    scr.MovePrintf(2+i, 2, "Initialising \"%v\"...", game.DataStored.Npcs[i].Name)
-    scr.MovePrintf(3+i, 2, "Found NPC query string!")
-    scr.Refresh()
+	scr.MovePrintf(1, 2, "Created new game \"%v\"!", game.SaveGame)
+	for i := 0; i < len(game.DataStored.Npcs); i++ {
+		scr.MovePrintf(2+i, 2, "Initialising \"%v\"...", game.DataStored.Npcs[i].Name)
+		scr.MovePrintf(3+i, 2, "Found NPC query string!")
+		scr.Refresh()
 
-  }
-		// println(game.DataStored.Npcs[0].Name)
+	}
+	// println(game.DataStored.Npcs[0].Name)
 }
 func Continue(scr *Window) {
 	// recover state from last save?
