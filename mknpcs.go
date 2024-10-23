@@ -14,5 +14,16 @@ func MakeNpcs() []Npc {
 		},
 	}
   npcs = append(npcs, helper01)
+
+  rulmarc := Npc {
+    Name: "Rulmarc",
+    Ai: NpcAi {
+      PromptCharacterString: "You are a medieval villager called Rulmarc.",
+      QueryFromTableName: "helper",
+    },
+  }
+
+  npcs = append(npcs, rulmarc)
+
   return npcs
 }
