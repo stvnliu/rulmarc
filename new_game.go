@@ -5,7 +5,7 @@ import (
 	"time"
 
 	. "github.com/gbin/goncurses"
-	"gitlab.com/stvnliu/ai_game/utils/helper"
+	"gitlab.com/stvnliu/ai_game/utils/ncfmt"
 	. "gitlab.com/stvnliu/ai_game/utils/types"
 	"gitlab.com/stvnliu/ai_game/utils/windows"
 )
@@ -14,17 +14,7 @@ const (
 	STD_BLINK_INTERVAL = 450 * time.Millisecond
 )
 
-func IncrementalPrintMany(
-	w *Window,
-	y int,
-	x int,
-	texts []string,
-	duration time.Duration,
-) {
-	for i := 0; i < len(texts); i++ {
-		helper.IncrementalPrint(w, texts[i], y+i, x, int(1*time.Second))
-	}
-}
+
 func NewGame(scr *Window) {
 	//_, _ := scr.MaxYX()
 	game_name := windows.InputPrompt(scr, " New game information ", "Game name: ", 20)
@@ -67,11 +57,11 @@ func NewGame(scr *Window) {
 		"============ Copyright 2024 @ Zhongheng Liu & Zhiyong He =============",
 		"Please wait while we boot some AI models for the first part of the game...",
 	}
-	IncrementalPrintMany(w, 1, 1, texts, time.Duration(1*time.Second))
+	ncfmt.IncrementalPrintMany(w, 1, 1, texts, time.Duration(1*time.Second))
 
 	init_done := make(chan bool, 1)
 
-	go helper.BlinkCursorUntilDone(
+	go ncfmt.BlinkCursorUntilDone(
 		w,
 		len(texts)+1,
 		1,
@@ -86,8 +76,8 @@ func NewGame(scr *Window) {
 		"Ok we are done with everything!",
 		"Now try putting something in the input box below!",
 	}
-	IncrementalPrintMany(w, len(texts)+1, 1, texts2, time.Duration(1*time.Second))
-	key := helper.BlinkCursorUntilInput(input_window, 1, 3, STD_BLINK_INTERVAL)
+	ncfmt.IncrementalPrintMany(w, len(texts)+1, 1, texts2, time.Duration(1*time.Second))
+	key := ncfmt.BlinkCursorUntilInput(input_window, 1, 3, STD_BLINK_INTERVAL)
 	Cursor(0)
   my_input := "You said: "
 	for {
@@ -111,7 +101,7 @@ func NewGame(scr *Window) {
 		key = input_window.GetChar()
 	}
 
-  helper.IncrementalPrint(w, my_input, 8, 1, int(time.Duration(1*time.Second)))
+  ncfmt.IncrementalPrint(w, my_input, 8, 1, int(time.Duration(1*time.Second)))
 	// User input processing
 	for {
 		ch := w.GetChar()
