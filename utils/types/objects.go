@@ -1,14 +1,22 @@
 package types
 
-func InitObjects() {
+/* func InitObjects() {
 	WEAPON_OLD_FAMILY_SWORD := Weapon{
-    name: "Mjorrsword",
+    name: "Mjornirsvord",
     atk: 10,
     meta: WeaponMetadata{
-      info: "The Mjorrsword is an old sword, a legacy in your family. \nLast used in the Fjolrholmer Revolution, it is now yours to hold on to.",
-    }
+      info: "The Mjornirsvord is an old sword, a legacy in your family. \nLast used in the Fjallholmer Revolution, it is now yours to hold on to.",
+    },
   }
-}
+  WEAPON_SWORD2 := Weapon{
+    name: "Eesti vaenlaste hävitaja",
+    atk: 16,
+    meta: WeaponMetadata{
+      info: "Acquired from an antique shop, the Eesti vaenlaste hävitaja is a marvel of engineering.",
+    },
+  }
+  return
+}*/
 
 type Inventory struct {
 	weapons []Weapon

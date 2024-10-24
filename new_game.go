@@ -80,7 +80,7 @@ func NewGame(scr *Window) {
 	)
 
 	// Simulating game init process
-	// time.Sleep(time.Duration(10 * time.Second))
+	time.Sleep(time.Duration(10 * time.Second))
 	init_done <- true // can trigger blinker process finish
 	texts2 := []string{
 		"Ok we are done with everything!",
